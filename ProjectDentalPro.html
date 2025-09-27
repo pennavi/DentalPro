@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DentalPro</title>
+  <link
+    rel="stylesheet"
+    href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
+  />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f7fbff;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .topbar {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      color: #fff;
+      font-size: 14px;
+      padding: 8px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1001;
+      flex-wrap: wrap;
+    }
+
+    .topbar-left {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .topbar-left span i {
+      margin-right: 6px;
+      color: #ffdd00;
+    }
+
+    .topbar-right {
+      display: flex;
+      gap: 15px;
+    }
+
+    .topbar-right a {
+      color: #fff;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .topbar-right a:hover {
+      color: #ffdd00;
+    }
+
+   
+    .header {
+      position: absolute;
+      top: 50px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background: transparent;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .nav {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    .nav a {
+      color: #fff;
+      font-weight: bold;
+      font-size: 15px;
+      transition: color 0.3s;
+    }
+
+    .nav a:hover {
+      color: #ffdd00;
+    }
+
+    .btn {
+      padding: 8px 15px;
+      border: 2px solid #fff;
+      color: #fff;
+      background: transparent;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #ffdd00;
+      color: #000;
+    }
+
+  
+    .hero {
+      height: 100vh;
+      color: #fff;
+      background: linear-gradient(
+          to right,
+          rgba(0, 118, 187, 0.75),
+          rgba(0, 180, 170, 0.75)
+        ),
+        url("https://tailwindcss-templates.netlify.app/dentalpro/images/cover-bg.jpeg")
+          no-repeat center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 140px 50px 0;
+    }
+
+    .hero-box {
+      max-width: 600px;
+    }
+
+    .hero h1 {
+      font-size: 50px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .hero .btn {
+      background: #00a99d;
+      color: #fff;
+      border: none;
+    }
+
+    .hero .btn:hover {
+      background: #008d85;
+    }
+
+    section {
+      padding: 60px 50px;
+    }
+    .title {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+ 
+    .about {
+      background: #f7fbff;
+      padding-bottom: 80px;
+      color: #1b2a41;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .about-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+    .about-left {
+      flex: 1;
+      min-width: 280px;
+    }
+    .about-left small {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #475f7b;
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+    .about-left h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .about-left p:first-of-type {
+      font-weight: 600;
+      margin-bottom: 15px;
+      font-size: 15px;
+      color: #475f7b;
+    }
+    .about-left p:last-of-type {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #475f7b;
+    }
+    .about-right {
+      flex: 1;
+      min-width: 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      justify-content: center;
+    }
+    .point {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .point-icon {
+      min-width: 40px;
+      height: 40px;
+      background-color: #2f6dcc;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 6px;
+      position: relative;
+    }
+    .point-icon::before {
+      content: "";
+      display: block;
+      width: 20px;
+      height: 20px;
+      margin: 10px auto 0;
+      background-color: #a7c5f9;
+      border-radius: 50%;
+    }
+    .point-content {
+      max-width: 480px;
+    }
+    .point-content strong {
+      display: block;
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 6px;
+      color: #1b2a41;
+    }
+    .point-content p {
+      font-size: 14px;
+      color: #475f7b;
+      line-height: 1.5;
+    }
+
+    .services-cards {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      padding-bottom: 60px;
+    }
+    .service-card {
+      background: #fff;
+      padding: 25px 20px;
+      border-radius: 8px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      color: #1b2a41;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    }
+    .service-icon-wrapper {
+      position: relative;
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 15px;
+    }
+    .service-icon-bg {
+      background: #a7c5f9;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 0;
+    }
+    .service-icon {
+      color: #2f6dcc;
+      font-size: 32px;
+      position: relative;
+      z-index: 1;
+    }
+    .service-card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    .service-card p {
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: #475f7b;
+    }
+    .service-card a {
+      font-size: 14px;
+      color: #2f6dcc;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    .service-card a:hover {
+      color: #1b2a41;
+      text-decoration: underline;
+    }
+
+    .testimonials {
+      max-width: 1200px;
+      margin: 0 auto 80px;
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+      color: #1b2a41;
+      padding: 0 50px;
+    }
+    .testimonials-left {
+      flex: 1 1 50%;
+      min-width: 300px;
+    }
+    .testimonials-left small {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #6c6c6c;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    .testimonials-left h2 {
+      font-weight: 700;
+      font-size: 26px;
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+    .testimonials-left p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #333;
+      max-width: 580px;
+    }
+    .testimonials-right {
+      flex: 1 1 40%;
+      min-width: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: flex-start;
+      gap: 10px;
+      font-style: italic;
+      color: #666;
+    }
+    .testimonial-box {
+      background-color: #c1d0e5;
+      width: 100%;
+      height: 200px;
+      border-radius: 6px;
+    }
+
+    .cta-bar {
+      background: linear-gradient(to right, #2177d2, #40b2a4);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 50px;
+      font-weight: 700;
+      font-size: 18px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .cta-bar a.btn {
+      padding: 10px 22px;
+      background: white;
+      color: #2177d2;
+      font-weight: 700;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.3s, color 0.3s;
+    }
+    .cta-bar a.btn:hover {
+      background: #ffdd00;
+      color: #333;
+    }
+
+    
+    .footer {
+      background-color: #192635;
+      color: #ccc;
+      padding: 50px 50px 30px;
+      font-size: 14px;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    .footer-box {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px;
+      color: #ccc;
+    }
+    .footer h3 {
+      margin-bottom: 15px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+    }
+    .footer p {
+      margin-bottom: 12px;
+      color: #bbb;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .footer a {
+      color: #aaa;
+      font-size: 14px;
+      transition: color 0.3s;
+    }
+    .footer a:hover {
+      color: #fff;
+    }
+    .subscribe {
+      margin-top: 10px;
+    }
+    .subscribe small {
+      text-transform: uppercase;
+      font-size: 11px;
+      color: #555;
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .subscribe form {
+      display: flex;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .subscribe input[type="email"] {
+      padding: 10px;
+      border-radius: 4px;
+      border: none;
+      flex: 1;
+      font-size: 14px;
+    }
+    .subscribe button {
+      background: #40b2a4;
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 4px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .subscribe button:hover {
+      background: #2f8e7d;
+    }
+    .footer-contact {
+      font-size: 14px;
+    }
+    .footer-contact i {
+      margin-right: 8px;
+      color: #40b2a4;
+    }
+    .social-links a {
+      margin-right: 15px;
+      font-size: 18px;
+      color: #ccc;
+      transition: color 0.3s;
+    }
+    .social-links a:hover {
+      color: #40b2a4;
+    }
+    .footer-bottom {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 13px;
+      color: #666;
+      border-top: 1px solid #333;
+      padding-top: 15px;
+      font-style: italic;
+    }
+    
+       @media (max-width: 992px) {
+      .hero h1 { font-size: 38px; }
+      .hero p { font-size: 16px; }
+    }
+
+    @media (max-width: 768px) {
+      .header { padding: 15px 25px; }
+      .nav {
+        display: none; position: absolute; top: 100%; right: 0;
+        background: rgba(0,0,0,0.9); flex-direction: column;
+        width: 200px; padding: 20px; border-radius: 6px;
+      }
+      .nav.active { display: flex; }
+      .nav a { color: #fff; margin-bottom: 10px; }
+      .hamburger { display: flex; }
+      .about-content, .testimonials { flex-direction: column; padding: 0 20px; }
+      .cta-bar { flex-direction: column; text-align: center; }
+      .footer-box { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 120px 20px 0; }
+      .hero h1 { font-size: 28px; }
+      .hero p { font-size: 14px; }
+      .footer-box { grid-template-columns: 1fr; }
+    }
+  
+    @media (max-width: 768px) {
+      .about-content,
+      .testimonials {
+        flex-direction: column;
+        padding: 0 20px;
+      }
+      .testimonials-right {
+        align-items: flex-start;
+      }
+      .cta-bar {
+        flex-direction: column;
+        text-align: center;
+      }
+      .footer-box {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 480px) {
+      .footer-box {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="topbar">
+    <div class="topbar-left">
+      <span><i class="ion-ios-location"></i> 1985 Kerry Way, Whittier, CA, USA</span>
+      <span><i class="ion-ios-clock"></i> Mon - Fri: 9:00 - 19:00 | Closed on Weekends</span>
+      <span><i class="ion-ios-telephone"></i> +1 562-789-1935</span>
+    </div>
+    <div class="topbar-right">
+      <a href="#"><i class="ion-social-facebook"></i></a>
+      <a href="#"><i class="ion-social-twitter"></i></a>
+      <a href="#"><i class="ion-social-instagram"></i></a>
+      <a href="#"><i class="ion-social-youtube"></i></a>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="logo">DentalPro</div>
+    <nav class="nav">
+      <a href="#">Home</a>
+      <a href="#">Services</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <a href="./DentalProResponsive.html" class="btn">Book Appointment</a>
+      
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-box">
+      <h1>Welcome to the Dentist Office of Dr. Thomas Dooley</h1>
+      <p>Excellence in Dentistry in the Heart of NY</p>
+       <a href="./DentalProResponsive.html" class="btn">Book Appointment</a>
+
+      
+    </div>
+  </section>
+
+  
+  <section class="about">
+    <div class="about-content">
+      <div class="about-left">
+        <small>OUR CLINIC</small>
+        <h2>Welcome to the Dentist Office of Dr. Thomas Dooley</h2>
+        <p>Excellence in Dentistry in the Heart of NY</p>
+        <p>
+          Donec convallis sollicitudin facilisis. Integer nisl ligula,
+          accumsan non tincidunt ac, imperdiet in enim. Donec efficitur
+          ullamcorper metus, eu venenatis nunc. Nam eget neque tempus, mollis
+          sem a, faucibus mi.
+        </p>
+      </div>
+      <div class="about-right">
+        <div class="point">
+          <div class="point-icon"></div>
+          <div class="point-content">
+            <strong>Everything You Need Under One Roof</strong>
+            <p>
+              Our comprehensive services allow you to receive all needed dental
+              care right here in our state-of-art office — from dental cleanings
+              and fillings to dental implants and extractions.
+            </p>
+          </div>
+        </div>
+        <div class="point">
+          <div class="point-icon"></div>
+          <div class="point-content">
+            <strong>Our Patient-Focused Approach</strong>
+            <p>
+              Your treatment plan will perfectly match your needs, lifestyle, and
+              goals. Even if it’s been years since you last visited the dentist,
+              we can help. Our comfortable office, compassionate team, and
+              minimally-invasive treatments will help you feel completely at
+              ease.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="services-cards">
+      <div class="service-card">
+        <div class="service-icon-wrapper">
+          <div class="service-icon-bg"></div>
+          <i class="ion-ios-heart service-icon"></i>
+        </div>
+        <h3>Teeth Whitening</h3>
+        <p>Let us show you how our experience.</p>
+        <a href="#">Read More</a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon-wrapper">
+          <div class="service-icon-bg"></div>
+          <i class="ion-ios-paw service-icon"></i>
+        </div>
+        <h3>Oral Surgery</h3>
+        <p>Let us show you how our experience.</p>
+        <a href="#">Read More</a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon-wrapper">
+          <div class="service-icon-bg"></div>
+          <i class="ion-ios-construct service-icon"></i>
+        </div>
+        <h3>Painless Dentistry</h3>
+        <p>Let us show you how our experience.</p>
+        <a href="#">Read More</a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon-wrapper">
+          <div class="service-icon-bg"></div>
+          <i class="ion-ios-flask service-icon"></i>
+        </div>
+        <h3>Periodontics</h3>
+        <p>Let us show you how our experience.</p>
+        <a href="#">Read More</a>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="testimonials">
+    <div class="testimonials-left">
+      <small>PATIENT TESTIMONIALS</small>
+      <h2>Why choose the Mesothelioma Center?</h2>
+      <p>
+        Aenean ut tellus tellus. Suspendisse potenti. Nullam tincidunt lacus
+        tellus, sed aliquam est vehicula a. Pellentesque consectetur condimentum
+        nulla, eleifend condimentum purus vehicula in. Donec convallis
+        sollicitudin facilisis. Integer nisl ligula, accumsan non tincidunt ac,
+        imperdiet in enim. Donec efficitur ullamcorper metus, eu venenatis nunc.
+        Nam eget neque tempus, mollis sem a, faucibus mi.
+      </p>
+    </div>
+    <div class="testimonials-right">
+      <div class="testimonial-box"></div>
+      <div>Aenean ante nisi, gravida non mattis semper.</div>
+    </div>
+  </section>
+
+  <div class="cta-bar">
+    <div>Get in touch with us today! Call us on: +1 562-789-1935</div>
+    <a href="#" class="btn">Book Appointment</a>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-box">
+      <div>
+        <h3>DentalPro</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam
+          nonumy.
+        </p>
+
+        <div class="subscribe">
+          <small>Subscribe for Our Newsletter</small>
+          <form>
+            <input type="email" placeholder="Enter Your Email Address" required />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+
+      <div>
+        <h3>Treatments</h3>
+        <p><a href="#">General Dentistry</a></p>
+        <p><a href="#">Cosmetic Dentistry</a></p>
+        <p><a href="#">Oral Health</a></p>
+      </div>
+
+      <div>
+        <h3>Contact Details</h3>
+        <p class="footer-contact">
+          <i class="ion-ios-location"></i>1985 Kerry Way, Whittier, CA, USA
+        </p>
+        <p class="footer-contact">
+          <i class="ion-ios-clock"></i>Mon - Fri: 9:00 - 19:00<br />Closed on
+          Weekends
+        </p>
+        <p class="footer-contact">
+          <i class="ion-ios-telephone"></i>+1 562-789-1935
+        </p>
+        <p class="footer-contact">
+          <i class="ion-ios-email"></i> dentalpro@example.com
+        </p>
+      </div>
+
+      <div>
+        <h3>We're Social</h3>
+        <div class="social-links">
+          <a href="#"><i class="ion-social-facebook"></i></a>
+          <a href="#"><i class="ion-social-twitter"></i></a>
+          <a href="#"><i class="ion-social-instagram"></i></a>
+          <a href="#"><i class="ion-social-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © 2018 ProDentists. All Rights Reserved.
+    </div>
+  </footer>
+</body>
+</html>
